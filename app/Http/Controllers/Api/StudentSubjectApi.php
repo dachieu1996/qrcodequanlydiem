@@ -21,6 +21,7 @@ class StudentSubjectApi extends Controller
         try{
             $student = Student::where('code',$student_code)->first();
             foreach($student->subjects as $subject){
+                if($subject->pivot->end_score == NULL) continue;
                 $id = $subject->id;
                 $json[$id]['name'] = (string)$subject->name;
                 $json[$id]['credit'] = (int)$subject->credit;
